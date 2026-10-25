@@ -1,0 +1,8 @@
+{
+  "name": "discord-tag-ballot-web",
+  "version": "1.0.0",
+  "description": "High-end minimalist Discord tag voting web application. Zero AI templates, Zero Emoji.",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}

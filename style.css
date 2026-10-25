@@ -1,0 +1,568 @@
+/* ==========================================================================
+   DISCORD 伺服器標籤票選 - 4字中文專屬版
+   完全零 EMOJI | 無多餘雜亂按鈕 | 極簡暗黑科技美學
+   ========================================================================== */
+
+:root {
+  --bg-core: #0A0C10;
+  --bg-surface: #11141A;
+  --bg-surface-elevated: #161A22;
+  --bg-surface-hover: #1C212C;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-active: #5865F2;
+
+  --text-primary: #F2F3F5;
+  --text-secondary: #949BA4;
+  --text-muted: #5C626C;
+  --text-accent: #5865F2;
+  --text-highlight: #FFFFFF;
+
+  --discord-blurple: #5865F2;
+  --discord-blurple-hover: #4752C4;
+  --discord-dark: #2B2D31;
+  --discord-message-bg: #313338;
+  --discord-badge-bg: #232428;
+
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Noto Sans TC', -apple-system, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-core);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 頂部導覽列 */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 12, 16, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 1rem 2rem;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-badge {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.5rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-strong);
+  color: var(--text-accent);
+  font-weight: 700;
+}
+
+.brand-divider {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.brand-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-action-btn {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.header-action-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  background: var(--bg-surface-hover);
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #23A55A;
+  box-shadow: 0 0 10px rgba(35, 165, 90, 0.6);
+  display: inline-block;
+}
+
+.status-counter {
+  padding: 0.25rem 0.65rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-highlight);
+  border-radius: var(--radius-sm);
+}
+
+/* 雙欄主容器 */
+.main-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem 4rem;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 900px) {
+  .main-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 面板通用樣式 */
+.panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.panel-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.panel-sub {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Discord 聊天欄模擬器 */
+.discord-mockup-wrapper {
+  background: var(--discord-message-bg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.discord-channel-header {
+  background: var(--discord-dark);
+  padding: 0.5rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.hash-symbol {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+.channel-name {
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.discord-message {
+  padding: 0.85rem;
+  display: flex;
+  gap: 0.85rem;
+}
+
+.discord-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #5865F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  flex-shrink: 0;
+}
+
+.discord-content {
+  flex: 1;
+}
+
+.discord-user-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.discord-username {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #FFFFFF;
+}
+
+/* Discord 標籤徽章 */
+.discord-tag-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+}
+
+.discord-tag-badge.mode-clan {
+  color: #B5BAC1;
+  background: var(--discord-badge-bg);
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.discord-tag-badge.mode-role {
+  color: #5865F2;
+  background: rgba(88, 101, 242, 0.15);
+  border: 1px solid rgba(88, 101, 242, 0.4);
+  padding: 0.1rem 0.5rem;
+  border-radius: 12px;
+}
+
+.discord-timestamp {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.discord-text {
+  color: #DBDEE1;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.preview-mode-switch {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.mode-tab {
+  flex: 1;
+  background: var(--bg-core);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mode-tab:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.mode-tab.active {
+  color: var(--text-accent);
+  border-color: var(--text-accent);
+  background: var(--bg-surface-elevated);
+  font-weight: 700;
+}
+
+/* 提議新標籤表單 */
+.propose-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.input-prefix-wrapper {
+  display: flex;
+  align-items: center;
+  background: var(--bg-core);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+}
+
+.input-prefix-wrapper:focus-within {
+  border-color: var(--text-accent);
+}
+
+.input-prefix-wrapper .prefix {
+  padding: 0.6rem 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.input-prefix-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 0.65rem 0.75rem;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.input-prefix-wrapper input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-hint {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+/* 按鈕風格 */
+.btn {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background: var(--text-accent);
+  color: #FFFFFF;
+  border: 1px solid var(--text-accent);
+}
+
+.btn-primary:hover {
+  background: var(--discord-blurple-hover);
+  border-color: var(--discord-blurple-hover);
+}
+
+/* 右側：標籤投票清單 */
+.ballot-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.75rem;
+}
+
+.section-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.ledger-count {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.ballot-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* 標籤卡片 */
+.tag-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.tag-card:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-surface-elevated);
+}
+
+.tag-card.active-preview {
+  border-color: var(--text-accent);
+}
+
+.tag-card.is-voted {
+  border-color: rgba(88, 101, 242, 0.45);
+  background: rgba(88, 101, 242, 0.06);
+}
+
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-tag-identity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rank-index {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 24px;
+}
+
+.tag-card:nth-child(1) .rank-index {
+  color: #FEE75C;
+}
+
+.tag-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.vote-action-btn {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: var(--bg-core);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+}
+
+.vote-action-btn:hover {
+  background: var(--text-accent);
+  color: #FFFFFF;
+  border-color: var(--text-accent);
+}
+
+.tag-card.is-voted .vote-action-btn {
+  background: var(--text-accent);
+  color: #FFFFFF;
+  border-color: var(--text-accent);
+}
+
+.tag-card.is-voted .vote-action-btn:hover {
+  background: #ED4245;
+  border-color: #ED4245;
+}
+
+/* 進度條 */
+.card-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-track {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-core);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--text-accent);
+  transition: width 0.3s ease;
+}
+
+.progress-metrics {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.metric-pct {
+  color: var(--text-highlight);
+  font-weight: 700;
+  width: 45px;
+  text-align: right;
+}
+
+.metric-votes {
+  color: var(--text-muted);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+}

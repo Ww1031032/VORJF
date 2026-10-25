@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DISCORD // 伺服器標籤票選</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 頂部導覽列 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-badge">DISCORD</span>
+        <span class="brand-divider">//</span>
+        <h1 class="brand-title">伺服器標籤票選</h1>
+      </div>
+      <div class="header-right">
+        <button id="export-btn" class="header-action-btn">[ 複製排名結果 ]</button>
+        <div class="header-status">
+          <span class="status-indicator"></span>
+          <span class="status-counter" id="global-stats-pill">總票數：0</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- 左側欄：Discord 效果預覽 & 提議新標籤 -->
+    <aside class="sidebar-column">
+      
+      <!-- Discord 實時視覺預覽 -->
+      <section class="panel preview-panel">
+        <div class="panel-header">
+          <span class="panel-label">效果即時預覽</span>
+          <span class="panel-sub">DISCORD 呈現</span>
+        </div>
+        
+        <div class="discord-mockup-wrapper">
+          <div class="discord-channel-header">
+            <span class="hash-symbol">#</span>
+            <span class="channel-name">閒聊討論區</span>
+          </div>
+          
+          <div class="discord-message">
+            <div class="discord-avatar">
+              <span>成員</span>
+            </div>
+            <div class="discord-content">
+              <div class="discord-user-row">
+                <span class="discord-username">成員暱稱</span>
+                <!-- 動態 4 字中文標籤 -->
+                <span class="discord-tag-badge" id="preview-tag-badge">[ 伺服標籤 ]</span>
+                <span class="discord-timestamp">今天 10:30</span>
+              </div>
+              <div class="discord-text">
+                點擊右側候選標籤，即時預覽聊天欄呈現效果。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-mode-switch">
+          <button class="mode-tab active" data-mode="clan">[ 公會標籤 ]</button>
+          <button class="mode-tab" data-mode="role">[ 身分組標籤 ]</button>
+        </div>
+      </section>
+
+      <!-- 新增 4 字中文標籤 -->
+      <section class="panel propose-panel">
+        <div class="panel-header">
+          <span class="panel-label">新增候選標籤</span>
+          <span class="panel-sub">限 4 個中文字</span>
+        </div>
+        
+        <form id="propose-form" class="propose-form">
+          <div class="input-prefix-wrapper">
+            <span class="prefix">#</span>
+            <input type="text" id="tag-input" maxlength="4" placeholder="輸入 4 字中文 (例: 極客先鋒)" required autocomplete="off">
+          </div>
+          <span class="form-hint">僅限 4 個中文字，不支援英文、數字或符號</span>
+          <button type="submit" class="btn btn-primary submit-btn">
+            [ + 新增標籤 ]
+          </button>
+        </form>
+      </section>
+    </aside>
+
+    <!-- 右側欄：候選標籤列表 -->
+    <section class="content-column">
+      <div class="ballot-toolbar">
+        <h2 class="section-heading">候選標籤清單</h2>
+        <span class="ledger-count" id="candidate-count">0 個標籤</span>
+      </div>
+
+      <!-- 標籤投票列表 -->
+      <div class="ballot-grid" id="ballot-grid">
+        <!-- 由 JS 動態生成 -->
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
