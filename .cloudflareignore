@@ -1,0 +1,7 @@
+{
+  "name": "vorjf",
+  "compatibility_date": "2026-10-19",
+  "assets": {
+    "directory": "dist" // Change "." to your actual build folder
+  }
+}
